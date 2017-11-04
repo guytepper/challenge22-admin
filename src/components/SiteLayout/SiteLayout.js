@@ -1,5 +1,7 @@
 import React from 'react';
 import { Layout, Menu, Icon } from 'antd';
+import './SiteLayout.css';
+
 const { Header, Content, Footer, Sider } = Layout;
 
 function SiteLayout({ routes }) {
@@ -12,11 +14,15 @@ function SiteLayout({ routes }) {
           console.log(collapsed, type);
         }}
       >
-        <div className="logo" />
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
+        <div className="logo">Challenge 22</div>
+        <Menu theme="dark" mode="inline">
           <Menu.Item key="1">
             <Icon type="share-alt" />
             <span className="nav-text">Autopost</span>
+          </Menu.Item>
+          <Menu.Item key="2" style={{ marginTop: 20 }}>
+            <Icon type="logout" />
+            <span className="nav-text">Logout</span>
           </Menu.Item>
         </Menu>
       </Sider>
