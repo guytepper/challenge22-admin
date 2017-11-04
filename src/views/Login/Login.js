@@ -1,11 +1,33 @@
-/*global FB*/
-
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Icon } from 'antd';
 import { inject } from 'mobx-react';
+import './Login.css';
 
-function Login({ RootStore }) {
-  return <Button onClick={() => RootStore.userStore.logIn()}>Login</Button>;
+function logInPrompt(userStore, history) {
+  userStore
+    .logIn()
+    .then(res => history.push('/'))
+    .catch(err => console.error(err));
+}
+
+function Login({ RootStore, history }) {
+  return (
+    <div className="login-page">
+      <div className="login-page-content">
+        <h1 className="login-page-title">Challenge 22 Admin</h1>
+        <div className="login-page-text">
+          <p>Welcome to Challenge 22 admin dashboard!</p>
+          <p>Please log in using the button below.</p>
+        </div>
+        <Button onClick={() => logInPrompt(RootStore.userStore, history)}>
+          <Icon type="login" />Login with Facebook
+        </Button>
+      </div>
+      <footer>
+        <a href="#">Privacy Policy</a>
+      </footer>
+    </div>
+  );
 }
 
 export default inject('RootStore')(Login);

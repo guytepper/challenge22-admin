@@ -16,19 +16,22 @@ class UserStore {
 
   @action
   logIn() {
-    FB.login(
-      response => {
-        if (response.status === 'connected') {
-          const { userID } = response.authResponse;
-          FB.api('/me', { fields: ['picture', 'first_name', 'last_name'] }, res => {
-            runInAction('Update User', () => (this.User = res));
-          });
-        } else {
-          console.log('wat');
-        }
-      },
-      { scope: 'user_managed_groups,user_photos,publish_actions' }
-    );
+    return new Promise((resolve, reject) => {
+      FB.login(
+        response => {
+          if (response.status === 'connected') {
+            const { userID } = response.authResponse;
+            FB.api('/me', { fields: ['picture', 'first_name', 'last_name'] }, res => {
+              runInAction('Update User', () => (this.User = res));
+              resolve(response);
+            });
+          } else {
+            reject(response);
+          }
+        },
+        { scope: 'user_managed_groups,user_photos,publish_actions' }
+      );
+    });
   }
 }
 
