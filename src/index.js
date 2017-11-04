@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 import routes from './routes';
-import SiteLayout from './components/Layout';
+import SiteLayout from './components/SiteLayout';
 import Login from './views/Login';
 import RootStore from './stores/RootStore';
 

@@ -15,8 +15,8 @@ function SiteLayout({ routes }) {
         <div className="logo" />
         <Menu theme="dark" mode="inline" defaultSelectedKeys={['4']}>
           <Menu.Item key="1">
-            <Icon type="user" />
-            <span className="nav-text">nav 1</span>
+            <Icon type="share-alt" />
+            <span className="nav-text">Autopost</span>
           </Menu.Item>
         </Menu>
       </Sider>
