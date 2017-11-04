@@ -2,19 +2,10 @@
 
 import React from 'react';
 import { Button } from 'antd';
+import { inject } from 'mobx-react';
 
-function facebookLogin() {
-  FB.getLoginStatus(function(response) {
-    if (response.status === 'connected') {
-      console.log('Logged in.');
-    } else {
-      FB.login();
-    }
-  });
+function Login({ RootStore }) {
+  return <Button onClick={() => RootStore.userStore.logIn()}>Login</Button>;
 }
 
-function Login() {
-  return <Button onClick={facebookLogin}>Login</Button>;
-}
-
-export default Login;
+export default inject('RootStore')(Login);
