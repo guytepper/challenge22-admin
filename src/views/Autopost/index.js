@@ -1,3 +1,3 @@
-import Autopost from './Autopost';
+import AutopostContainer from './AutopostContainer';
 
-export default Autopost;
+export default AutopostContainer;
