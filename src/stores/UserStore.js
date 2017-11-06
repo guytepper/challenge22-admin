@@ -8,6 +8,7 @@ class UserStore {
   }
 
   @observable User = {};
+  @observable userGroups = [];
 
   @computed
   get authed() {
@@ -20,9 +21,8 @@ class UserStore {
       FB.login(
         response => {
           if (response.status === 'connected') {
-            const { userID } = response.authResponse;
-            FB.api('/me', { fields: ['picture', 'first_name', 'last_name'] }, res => {
               runInAction('Update User', () => (this.User = res));
+            FB.api('/me', { fields: ['picture', 'first_name', 'last_name', 'groups'] }, res => {
               resolve(response);
             });
           } else {
