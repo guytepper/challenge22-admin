@@ -12,7 +12,7 @@ class UserStore {
 
   @computed
   get authed() {
-    return this.user.userID;
+    return this.user.id;
   }
 
   @action
@@ -31,6 +31,13 @@ class UserStore {
         },
         { scope: 'user_managed_groups,user_photos,publish_actions' }
       );
+    });
+  }
+
+  @action
+  logOut() {
+    FB.logout(response => {
+      runInAction('Update User', () => (this.user = {}));
     });
   }
 }

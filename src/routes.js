@@ -1,20 +1,24 @@
 import React from 'react';
+import { inject, observer } from 'mobx-react';
 import { Route, Redirect } from 'react-router-dom';
 import Autopost from './views/Autopost';
 
-function PrivateRoute({ component: Component, authed, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={props =>
-        true === true ? (
-          <Component {...props} />
-        ) : (
-          <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
-        )}
-    />
-  );
-}
+const PrivateRoute = inject('RootStore')(
+  observer(({ component: Component, RootStore, ...rest }) => {
+    const { userStore } = RootStore;
+    return (
+      <Route
+        {...rest}
+        render={props =>
+          userStore.authed ? (
+            <Component {...props} />
+          ) : (
+            <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+          )}
+      />
+    );
+  })
+);
 
 const Routes = (
   <div>

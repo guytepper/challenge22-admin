@@ -15,7 +15,7 @@ ReactDOM.render(
     <Router>
       <Switch>
         <Route exact path="/login" component={Login} />
-        <Route path="/" render={() => <SiteLayout routes={routes} />} />
+        <Route path="/" render={props => <SiteLayout routes={routes} {...props} />} />
       </Switch>
     </Router>
   </Provider>,
