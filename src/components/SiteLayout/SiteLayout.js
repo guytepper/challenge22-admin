@@ -1,10 +1,12 @@
 import React from 'react';
+import { inject } from 'mobx-react';
 import { Layout, Menu, Icon } from 'antd';
 import './SiteLayout.css';
 
 const { Header, Content, Footer, Sider } = Layout;
 
-function SiteLayout({ routes }) {
+function SiteLayout({ routes, history, RootStore }) {
+  const { userStore } = RootStore;
   return (
     <Layout>
       <Sider
@@ -18,11 +20,21 @@ function SiteLayout({ routes }) {
         <Menu theme="dark" mode="inline">
           <Menu.Item key="1">
             <Icon type="share-alt" />
-            <span className="nav-text">Autopost</span>
+            <span className="nav-text" onClick={() => console.log(1)}>
+              Autopost
+            </span>
           </Menu.Item>
           <Menu.Item key="2" style={{ marginTop: 20 }}>
             <Icon type="logout" />
-            <span className="nav-text">Logout</span>
+            <span
+              className="nav-text"
+              onClick={() => {
+                userStore.logOut();
+                history.push('/login');
+              }}
+            >
+              Logout
+            </span>
           </Menu.Item>
         </Menu>
       </Sider>
@@ -37,4 +49,4 @@ function SiteLayout({ routes }) {
   );
 }
 
-export default SiteLayout;
+export default inject('RootStore')(SiteLayout);
