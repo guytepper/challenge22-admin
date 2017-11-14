@@ -8,7 +8,6 @@ class UserStore {
   }
 
   @observable user = {};
-  @observable userGroups = [];
 
   @computed
   get authed() {
