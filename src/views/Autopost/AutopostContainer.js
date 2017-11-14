@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 import Autopost from './Autopost';
 
-const groups = [
-  { id: 1, name: 'Challenge 22 - August' },
-  { id: 2, name: 'Challenge 22 - September' }
-];
-
+@observer
+@inject('RootStore')
 class AutopostContainer extends Component {
   state = {};
+
   render() {
-    return <Autopost groups={groups} />;
+    const { groups } = this.props.RootStore.userStore.user;
+    return <Autopost groups={groups.data} />;
   }
 }
 
