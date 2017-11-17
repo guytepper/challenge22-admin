@@ -5,11 +5,11 @@ import assets from './assets.json';
 
 /**
  * Creates a new albums and returns it's id.
- * @param {string} name - The album name.
  * @param {string} groupId - The group to create the album in.
+ * @param {string} name - The album name.
  * @returns {Promise} A promise to be fulfilled with the album id.
  */
-function uploadAlbum(name, groupId) {
+function uploadAlbum(groupId, name) {
   return new Promise((resolve, reject) => {
     window.FB.api(
       `/351760581933597/albums`,
@@ -31,12 +31,12 @@ function uploadAlbum(name, groupId) {
 
 /**
  * Uploads a photo to a group album.
- * @param {string} description - The photo description.
  * @param {string} albumId - The album id to upload the photo to.
+ * @param {string} description - The photo description.
  */
-function uploadPhoto(description, groupId, albumId) {
+function uploadPhoto(albumId, description) {
   window.FB.api(
-    `/${groupId}/${albumId}/photos`,
+    `/${albumId}/photos`,
     'POST',
     {
       source: '{image-data}'
@@ -58,16 +58,16 @@ class AutopostContainer extends Component {
    * Upload all albums to a facebook group.
    * @param {string} groupId - The group Id to upload the album to.
    */
-  async uploadAlbums(groupId = '351760581933597') {
+  async uploadAlbums(groupId) {
     const albums = assets.albums;
     const promises = albums.map(album => {
-      return uploadAlbum(album.name, '351760581933597').then(id => {
+      return uploadAlbum('351760581933597', album.name).then(id => {
         album.id = id;
         return album;
       });
     });
     const uploadedAlbums = await Promise.all(promises);
-    uploadedAlbums.m;
+    uploadedAlbums;
   }
 
   render() {
