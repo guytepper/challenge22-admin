@@ -29,6 +29,26 @@ function uploadAlbum(name, groupId) {
   });
 }
 
+/**
+ * Uploads a photo to a group album.
+ * @param {string} description - The photo description.
+ * @param {string} albumId - The album id to upload the photo to.
+ */
+function uploadPhoto(description, groupId, albumId) {
+  window.FB.api(
+    `/${groupId}/${albumId}/photos`,
+    'POST',
+    {
+      source: '{image-data}'
+    },
+    function(response) {
+      if (response && !response.error) {
+        /* handle the result */
+      }
+    }
+  );
+}
+
 @observer
 @inject('RootStore')
 class AutopostContainer extends Component {
@@ -38,16 +58,16 @@ class AutopostContainer extends Component {
    * Upload all albums to a facebook group.
    * @param {string} groupId - The group Id to upload the album to.
    */
-  uploadAlbums(groupId = '351760581933597') {
+  async uploadAlbums(groupId = '351760581933597') {
     const albums = assets.albums;
-    let uploadedAlbums = [];
     const promises = albums.map(album => {
-      uploadAlbum('Getting Ready!', '351760581933597').then(id => {
+      return uploadAlbum(album.name, '351760581933597').then(id => {
         album.id = id;
         return album;
       });
     });
-    Promise.all(promises).then(res => console.log(res));
+    const uploadedAlbums = await Promise.all(promises);
+    uploadedAlbums.m;
   }
 
   render() {

@@ -1,7 +1,17 @@
 {
   "albums": [
     {
-      "name": "Getting Ready"
+      "name": "Getting Ready",
+      "files": [
+        {
+          "path": "../../assets/01.png",
+          "description":
+            "The mission: 22 days of veganism! no less, hopefully more! The means: An experienced team of vegans, eager to help and armed with lots of delicious food. Hope you're hungry!"
+        }
+      ]
+    },
+    {
+      "name": "Dietarians Corner"
     }
   ]
 }
