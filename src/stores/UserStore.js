@@ -8,6 +8,7 @@ class UserStore {
   }
 
   @observable user = {};
+  @observable token = '';
 
   @computed
   get authed() {
@@ -20,6 +21,7 @@ class UserStore {
       FB.login(
         response => {
           if (response.status === 'connected') {
+            runInAction('Update Token', () => (this.token = response.authResponse.accessToken));
             FB.api('/me', { fields: ['picture', 'first_name', 'last_name', 'groups'] }, res => {
               runInAction('Update User', () => (this.user = res));
               resolve(response);
@@ -36,6 +38,7 @@ class UserStore {
   @action
   logOut() {
     FB.logout(response => {
+      runInAction('Update Token', () => (this.token = ''));
       runInAction('Update User', () => (this.user = {}));
     });
   }
