@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 import axios from 'axios';
 import Autopost from './Autopost';
-import assets from './assets.json';
+import assets from './assets';
 
 function getDataUri(path) {
   return new Promise((resolve, reject) => {
@@ -73,13 +73,27 @@ class AutopostContainer extends Component {
   state = {};
 
   /**
+   * Upload photos to the repective album.
+   * @param {array} albums - Array of albums which include the photos.
+   */
+  uploadPhotos(albums) {
+    const token = this.props.RootStore.userStore.token;
+
+    albums.forEach(album => {
+      album.files.forEach(async file => {
+        console.log(file.path);
+        const data = await getDataUri(file.path);
+        uploadPhoto(album.id, data, file.description, token);
+      });
+    });
+  }
+
+  /**
    * Upload all albums to a facebook group.
    * @param {string} groupId - The group Id to upload the album to.
    */
   uploadAlbums = async groupId => {
     const albums = assets.albums;
-    const token = this.props.RootStore.userStore.token;
-
     const promises = albums.map(album => {
       return uploadAlbum('351760581933597', album.name).then(id => {
         album.id = id;
@@ -88,16 +102,7 @@ class AutopostContainer extends Component {
     });
 
     const uploadedAlbums = await Promise.all(promises);
-
-    uploadedAlbums.forEach(album => {
-      console.log(album);
-      album.files.forEach(file => {
-        console.log(file);
-        getDataUri(require('../../assets/GroupsAssets/albums/Getting_Ready/01.png')).then(data => {
-          uploadPhoto(album.id, data, file.description, token);
-        });
-      });
-    });
+    this.uploadPhotos(uploadedAlbums);
   };
 
   render() {
