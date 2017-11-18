@@ -20,7 +20,6 @@ class UserStore {
     return new Promise((resolve, reject) => {
       FB.login(
         response => {
-          console.log(response.authResponse.accessToken);
           if (response.status === 'connected') {
             runInAction('Update Token', () => (this.token = response.authResponse.accessToken));
             FB.api('/me', { fields: ['picture', 'first_name', 'last_name', 'groups'] }, res => {
