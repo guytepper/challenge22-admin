@@ -10,6 +10,7 @@ function Autopost({ groups, uploadAlbums }) {
   if (groups.length === 0) {
     return <p>It seems like there are no groups you're managing.</p>;
   }
+
   return (
     <Form>
       <div style={{ width: 240 }}>

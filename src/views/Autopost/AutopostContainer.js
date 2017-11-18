@@ -3,6 +3,26 @@ import { inject, observer } from 'mobx-react';
 import Autopost from './Autopost';
 import assets from './assets.json';
 
+function getDataUri(url, callback) {
+  var image = new Image();
+
+  image.onload = function() {
+    var canvas = document.createElement('canvas');
+    canvas.width = this.naturalWidth; // or 'width' if you want a special/scaled size
+    canvas.height = this.naturalHeight; // or 'height' if you want a special/scaled size
+
+    canvas.getContext('2d').drawImage(this, 0, 0);
+
+    // // Get raw image data
+    // callback(canvas.toDataURL('image/png').replace(/^data:image\/(png|jpg);base64,/, ''));
+    canvas.toBlob(callback);
+    // // ... or get as Data URI
+    // callback(canvas.toDataURL('image/png'));
+  };
+
+  image.src = url;
+}
+
 /**
  * Creates a new albums and returns it's id.
  * @param {string} groupId - The group to create the album in.
@@ -34,16 +54,16 @@ function uploadAlbum(groupId, name) {
  * @param {string} albumId - The album id to upload the photo to.
  * @param {string} description - The photo description.
  */
-function uploadPhoto(albumId, description) {
+function uploadPhoto(albumId, imgData, description) {
   window.FB.api(
     `/${albumId}/photos`,
     'POST',
     {
-      source: '{image-data}'
+      source: imgData
     },
     function(response) {
+      console.log(response);
       if (response && !response.error) {
-        /* handle the result */
       }
     }
   );
@@ -60,6 +80,7 @@ class AutopostContainer extends Component {
    */
   async uploadAlbums(groupId) {
     const albums = assets.albums;
+
     const promises = albums.map(album => {
       return uploadAlbum('351760581933597', album.name).then(id => {
         album.id = id;
@@ -67,7 +88,19 @@ class AutopostContainer extends Component {
       });
     });
     const uploadedAlbums = await Promise.all(promises);
-    uploadedAlbums;
+
+    uploadedAlbums.forEach(album => {
+      console.log(album);
+      album.files.forEach(file => {
+        console.log(require('../../assets/GroupsAssets/albums/Getting_Ready/01.png'));
+        getDataUri(require('../../assets/GroupsAssets/albums/Getting_Ready/01.png'), data => {
+          var fd = new FormData();
+          fd.append('source', data);
+          console.log(fd);
+          uploadPhoto('351760581933597', fd, 'it works fuck.');
+        });
+      });
+    });
   }
 
   render() {
