@@ -4,7 +4,7 @@ import axios from 'axios';
 import Autopost from './Autopost';
 import assets from './assets.json';
 
-function getDataUri(url) {
+function getDataUri(path) {
   return new Promise((resolve, reject) => {
     var image = new Image();
     image.onload = function() {
@@ -14,7 +14,7 @@ function getDataUri(url) {
       canvas.getContext('2d').drawImage(this, 0, 0);
       canvas.toBlob(blob => resolve(blob));
     };
-    image.src = url;
+    image.src = path;
   });
 }
 
