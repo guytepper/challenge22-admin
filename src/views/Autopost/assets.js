@@ -22,6 +22,26 @@ export default {
           description: "You are already familiar with many popular foods that just happen to be vegan: pasta, avocado sandwiches, peanut butter and jelly, French fries, falafel...\nHave we left anything out?\nAs the Challenge progresses, we'll get to know many more types of vegan fast food :)"
         }
       ],
+    },
+    {
+      name: 'Dietitian Corner',
+      files: [
+        {
+          path: require('../../assets/GroupsAssets/albums/Dietitian_Corner/01_Balanced_Vegan.png'),
+          description:
+            "The mission: 22 days of veganism! No less, hopefully more! 😃\nThe means: An experienced team of vegans, eager to help and armed with lots of delicious food. Hope you're hungry!"
+        }
+      ]
+    },
+    {
+      name: 'Dietitian Corner',
+      files: [
+        {
+          path: require('../../assets/GroupsAssets/albums/Dietitian_Corner/01_Balanced_Vegan.png'),
+          description:
+            "The mission: 22 days of veganism! No less, hopefully more! 😃\nThe means: An experienced team of vegans, eager to help and armed with lots of delicious food. Hope you're hungry!"
+        }
+      ]
     }
   ]
 };
