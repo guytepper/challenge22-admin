@@ -70,7 +70,15 @@ function uploadAlbum(groupId, name) {
 @observer
 @inject('RootStore')
 class AutopostContainer extends Component {
-  state = {};
+  state = { selectedGroup: '' };
+
+  /**
+   * Updates the state with the selected group.
+   * @param {string} groupId - The group Id to upload the album to.
+   */
+  onGroupSelect = groupId => {
+    this.setState({ selectedGroup: groupId });
+  };
 
   /**
    * Upload photos to the repective album.
@@ -107,7 +115,13 @@ class AutopostContainer extends Component {
 
   render() {
     const { groups } = this.props.RootStore.userStore.user;
-    return <Autopost groups={groups.data} uploadAlbums={this.uploadAlbums} />;
+    return (
+      <Autopost
+        groups={groups.data}
+        onGroupSelect={this.onGroupSelect}
+        uploadAlbums={this.uploadAlbums}
+      />
+    );
   }
 }
 
