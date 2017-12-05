@@ -73,6 +73,13 @@ function uploadAlbum(groupId, name) {
 class AutopostContainer extends Component {
   state = { selectedGroup: '' };
 
+  groups = this.props.RootStore.userStore.user.groups.data;
+
+  componentDidMount() {
+    // Set the initial selected group.
+    this.setState({ selectedGroup: this.groups[0].id });
+  }
+
   /**
    * Updates the state with the selected group.
    * @param {string} groupId - The group Id to upload the album to.
@@ -102,7 +109,7 @@ class AutopostContainer extends Component {
   uploadAlbums = async () => {
     const albums = assets.albums;
     const promises = albums.map(album => {
-      return uploadAlbum(this.state.groupId, album.name).then(id => {
+      return uploadAlbum(this.state.selectedGroup, album.name).then(id => {
         album.id = id;
         return album;
       });
@@ -113,10 +120,9 @@ class AutopostContainer extends Component {
   };
 
   render() {
-    const { groups } = this.props.RootStore.userStore.user;
     return (
       <Autopost
-        groups={groups.data}
+        groups={this.groups}
         onGroupSelect={this.onGroupSelect}
         uploadAlbums={this.uploadAlbums}
       />
