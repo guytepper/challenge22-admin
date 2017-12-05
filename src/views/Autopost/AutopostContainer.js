@@ -31,8 +31,10 @@ function uploadPhoto(albumId, blob, description, token) {
   var formData = new FormData();
   formData.append('access_token', token);
   formData.append('source', blob);
-  formData.append('message', description);
-  console.log('ahoy!');
+  if (description) {
+    formData.append('message', description);
+  }
+
   axios
     .post(`https://graph.facebook.com/${albumId}/photos`, formData)
     .then(res => {
@@ -50,11 +52,10 @@ function uploadPhoto(albumId, blob, description, token) {
 function uploadAlbum(groupId, name) {
   return new Promise((resolve, reject) => {
     window.FB.api(
-      `/351760581933597/albums`,
+      `/${groupId}/albums`,
       'POST',
       {
-        name,
-        message: 'Album description! It works!'
+        name
       },
       response => {
         if (response && !response.error && response.id) {
@@ -89,7 +90,6 @@ class AutopostContainer extends Component {
 
     albums.forEach(album => {
       album.files.forEach(async file => {
-        console.log(file.path);
         const data = await getDataUri(file.path);
         uploadPhoto(album.id, data, file.description, token);
       });
@@ -97,13 +97,12 @@ class AutopostContainer extends Component {
   }
 
   /**
-   * Upload all albums to a facebook group.
-   * @param {string} groupId - The group Id to upload the album to.
+   * Upload albums to a facebook group.
    */
-  uploadAlbums = async groupId => {
+  uploadAlbums = async () => {
     const albums = assets.albums;
     const promises = albums.map(album => {
-      return uploadAlbum('351760581933597', album.name).then(id => {
+      return uploadAlbum(this.state.groupId, album.name).then(id => {
         album.id = id;
         return album;
       });
