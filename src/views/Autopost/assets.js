@@ -116,7 +116,7 @@ export default {
       ]
     },
     {
-      name: 'Dietitian Corner',
+      name: 'Healthy Tips',
       files: [
         {
           path: require('../../assets/GroupsAssets/albums/Healthy_Tips/01.jpg')
@@ -187,7 +187,7 @@ export default {
       ]
     },
     {
-      name: 'introduction',
+      name: 'Introduction',
       files: [
         {
           path: require('../../assets/GroupsAssets/albums/introduction/01welcome.jpg'),
@@ -237,7 +237,7 @@ export default {
       ]
     },
     {
-      name: 'Sample_Menu',
+      name: 'Sample Menu',
       files: [
         {
           path: require('../../assets/GroupsAssets/albums/Sample_Menu/1.jpg'),
@@ -277,7 +277,7 @@ export default {
       ]
     },
     {
-      name: 'Weight_Loss_Maintenance_Tips',
+      name: 'Weight Loss Maintenance Tips',
       files: [
         {
           path: require('../../assets/GroupsAssets/albums/Weight_Loss_Maintenance_Tips/1.jpg'),
@@ -362,7 +362,7 @@ export default {
       ]
     },
     {
-      name: 'Weight_Loss_Menu',
+      name: 'Weight Loss Menu',
       files: [
         {
           path: require('../../assets/GroupsAssets/albums/Weight_Loss_Menu/1Monday.jpg'),
@@ -402,7 +402,7 @@ export default {
       ]
     },
     {
-      name: 'What_Do_Vegans_eat',
+      name: 'What Do Vegans Eat',
       files: [
         {
           path: require('../../assets/GroupsAssets/albums/What_Do_Vegans_eat/01.jpg'),
@@ -544,10 +544,10 @@ export default {
       ]
     },
     {
-      name: 'Calendar',
+      name: 'Daily Challenge',
       files: [
         {
-          path: require('../../assets/GroupsAssets/albums/calender/1.jpg')
+          path: require('../../assets/GroupsAssets/albums/calendar/1.jpg')
         }
       ]
     }
