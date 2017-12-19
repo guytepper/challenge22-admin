@@ -437,7 +437,7 @@ export default {
         {
           path: require('../../assets/GroupsAssets/albums/What_Do_Vegans_eat/07.jpg'),
           description:
-            "Try vegan stir-fries, sushi and pizza! More and more pizzerias are now offering dairy-free cheese. You can also try cheeseless pizza – don't forget to load on the veggie toppings!\n\nClick here for 20 vegan meals you can make in 20 minutes or less: http://www.babble.com/best-recipes/20-vegan-meals-you-can-make-in-20-minutes-or-less/\n"
+            "Try vegan stir-fries, sushi and pizza! More and more pizzerias are now offering dairy-free cheese. You can also try cheeseless pizza – don't forget to load on the veggie toppings!\n\nClick here for 20 vegan meals you can make in 20 minutes or less:\nhttps://www.kitchentreaty.com/20-quick-vegan-dinner-recipes-in-20-minutes-or-less/"
         },
         {
           path: require('../../assets/GroupsAssets/albums/What_Do_Vegans_eat/08.jpg'),
