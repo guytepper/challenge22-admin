@@ -24,7 +24,7 @@ function Autopost({ groups, onGroupSelect, uploadAlbums }) {
           </Select>
         </Form.Item>
         <Form.Item>
-          <Button onClick={uploadAlbums}>Test Upload</Button>
+          <Button onClick={uploadAlbums}>Upload Albums</Button>
         </Form.Item>
       </div>
     </Form>
