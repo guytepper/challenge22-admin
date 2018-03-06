@@ -24,7 +24,7 @@ function Login({ RootStore, history }) {
         </Button>
       </div>
       <footer>
-        <a href="#">Privacy Policy</a>
+        <a href="/privacy-policy.html">Privacy Policy</a>
       </footer>
     </div>
   );
